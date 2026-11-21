@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* Konsep "Lembar Inspeksi": kertas putih dingin, tinta navy, satu aksen biru sinyal,
+   warna andon hanya untuk status mesin & klasifikasi OEE. */
+@theme {
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+  --color-kertas: #f7f9fb;
+  --color-putih: #ffffff;
+  --color-tinta: #142033;
+  --color-tinta-2: #4a5a70; /* teks sekunder, kontras AA di atas kertas */
+  --color-baja: #8a97a8;    /* garis sekunder & grid gambar */
+  --color-garis: #dce3eb;   /* garis pembatas tipis */
+  --color-sinyal: #1f5bd8;
+  --color-sinyal-tua: #1748b0;
+  --color-sinyal-muda: #e8effc;
+
+  --color-abu: #f2f4f7;      /* band & kartu abu muda */
+  --color-permukaan: #f3f4f6; /* latar aplikasi dashboard */
+  --color-panel: #132544;    /* panel hero & footer */
+  --color-badan: #e7edf4;    /* badan mesin */
+  --color-badan-2: #c9d4e2;  /* sisi samping mesin */
+  --color-penunjuk: #7fa3ee; /* garis penunjuk titik inspeksi */
+
+  --radius-kartu: 1.5rem;
+
+  --color-andon-hijau: #1e9e5a;
+  --color-andon-kuning: #e3a008;
+  --color-andon-merah: #d64532;
+
+  /* skala modular 1.25 */
+  --text-kecil: 0.8rem;
+  --text-kecil--line-height: 1.4;
+  --text-badan: 1rem;
+  --text-badan--line-height: 1.6;
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.5;
+  --text-h3: 1.5625rem;
+  --text-h3--line-height: 1.25;
+  --text-h2: 1.953rem;
+  --text-h2--line-height: 1.15;
+  --text-hero: 3.815rem;
+  --text-hero--line-height: 1.02;
+}
+
+@layer base {
+  html {
+    background: var(--color-putih);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    background: var(--color-putih);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-sinyal);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility angka {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Garis-garis halus di panel hero */
+@utility panel-garis {
+  background-color: var(--color-panel);
+  background-image: linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 100%;
+}
+
+/* Sembunyikan scrollbar carousel tanpa mematikan scroll */
+@utility tanpa-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
